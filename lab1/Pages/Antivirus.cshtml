@@ -1,0 +1,72 @@
+﻿@page "{handler?}"
+@model AntivirusModel
+@{
+  ViewData["Title"] = "Antivirus";
+  Layout = null;
+}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>@ViewData["Title"] - lab1</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true"/>
+    <link rel="stylesheet" href="~/lab1.styles.css" asp-append-version="true"/>
+</head>
+<body>
+    <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+      <div class="container-fluid">
+        <ul class="navbar-nav">
+          <li class="nav-item">
+            <a class="nav-link active" asp-page="Index">Hardware</a>
+          </li>
+         <li class="nav-item">
+            <a class="nav-link" asp-page="Antivirus">Antivirus</a>
+          </li>
+            <li class="nav-item">
+                <a class="nav-link" asp-page="Updates">Updates</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" asp-page="Network">Network</a>
+            </li>
+            <a class="nav-link" asp-page="Antivirus" asp-page-handler="Json">Get JSON</a>
+        </ul> 
+      </div>
+    </nav>
+    
+<div class="text-center">
+    <ul class="list-group">
+        <li class="list-group-item d-inline-flex justify-content-center m-1">
+            <p class="fw-bold m-1">Antivirus installed: </p>
+            <p class="m-1">@Model.AntivirusInfo.AntivirusInstalled</p>
+        </li>
+    </ul>
+    <div class="d-flex justify-content-around">
+        @foreach (var d in Model.AntivirusInfo.AntivirusesList)
+            {
+                <div class="d-inline-flex justify-content-between">
+                    <ul class="list-group">
+                        <li class="list-group-item d-inline-flex justify-content-center m-1">
+                            <p class="fw-bold m-1">Display name: </p>
+                            <p class="m-1">@d.DisplayName</p>
+                        </li>
+                        <li class="list-group-item d-inline-flex justify-content-center m-1">
+                            <p class="fw-bold m-1">Instance GUID: </p>
+                            <p class="m-1">@d.InstanceGuid</p>
+                        </li>
+                        <li class="list-group-item d-inline-flex justify-content-center m-1">
+                            <p class="fw-bold m-1">Product State: </p>
+                            <p class="m-1">@d.ProductState</p>
+                        </li>
+                        <li class="list-group-item d-inline-flex justify-content-center m-1">
+                            <p class="fw-bold m-1">Timestamp: </p>
+                            <p class="m-1">@d.TimeStamp</p>
+                        </li>
+                    </ul>
+                </div>
+            }
+    </div>
+</div>
+</body>
+</html>
